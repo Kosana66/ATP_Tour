@@ -150,17 +150,30 @@ public class Match {
         p1Sets = 0;
         p2Sets = 0;   
         int cnt = 0;
+        Random rndNum = new Random();
         
-        while(true) {
-            playSet();
-            p1ScorePerSet[cnt] = p1Gems;
-            p2ScorePerSet[cnt] = p2Gems;
-            cnt++;
-            if(p1Sets == winSetNum) {
+        if(rndNum.nextInt(100-0+1) == 1) {
+            if(rndNum.nextInt(1-0+1)+1 == 1) {
+                p1.setInjured(true);
+                System.out.println("Teniser " + p1.getName() + " se povredio. ");
+                return p2;
+            } else {
+                p2.setInjured(true);
+                System.out.println("Teniser " + p2.getName() + " se povredio. ");
                 return p1;
             }
-            else if(p2Sets == winSetNum) {
-                return p2;
+        } else {
+            while(true) {
+                playSet();
+                p1ScorePerSet[cnt] = p1Gems;
+                p2ScorePerSet[cnt] = p2Gems;
+                cnt++;
+                if(p1Sets == winSetNum) {
+                    return p1;
+                }
+                else if(p2Sets == winSetNum) {
+                    return p2;
+                }
             }
         }
     }    

@@ -45,4 +45,10 @@ abstract public class Tournament {
     
     abstract public void play();
     
+    @Override
+    public String toString(){
+        String tmpString = this.tourName + "," + this.tourType + "," + this.tourSurface ;
+        return tmpString;
+    }
+    
 }

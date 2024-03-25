@@ -1,6 +1,8 @@
 package paket1;
 
-public class Player {
+import java.util.Comparator;
+
+public class Player implements Comparator<Player> {
 
     private String name;
     private String ability;
@@ -23,25 +25,6 @@ public class Player {
         this.atpPoints = Integer.parseInt(tokeni[4]);
     }
     
-//    public static void main(String args[]) {
-//        
-//        Player br1 = new Player("1,Novak Djokovic,mentality,hard,0");
-//        
-//
-//        br1.setName("Mile Milovic");
-//        br1.setAbility("psiha");
-//        br1.setPreferedSurface("sljaka");
-//        br1.setAtpRank(2);
-//        br1.setAtpPoints(13);
-//        br1.setInjured(true);
-//        System.out.println(br1.toString());
-//        
-//    }
-    
-      
-        
-        
-    
     public int servePointChance(Player opponent, String surface) {
         int verovatnoca = 50;
         verovatnoca += (this.preferedSurface.equals(surface)) ? 5 : 0;
@@ -61,9 +44,8 @@ public class Player {
     
     @Override
     public String toString() {
-        String tmpString = this.name + " ima sposobnost " + this.ability + ", voli da igra na " + this.preferedSurface + 
-                ". Na listi je " + this.atpRank + ".mesto sa " + this.atpPoints + " poena. ";
-        tmpString += this.injured ? "Povredjen je." : "Nije povredjen.";
+        String tmpString = this.atpRank + "," + this.name + "," + this.ability + 
+                "," + this.preferedSurface + "," + this.atpPoints;
         return tmpString;
     }
     
@@ -114,5 +96,24 @@ public class Player {
     public void setInjured(boolean injured) {
         this.injured = injured;
     }
+
+    @Override  
+    public int compare(Player player1, Player player2) {
+        return -Integer.compare(player1.getAtpPoints(), player2.getAtpPoints());
+    }  
     
+    //    public static void main(String args[]) {
+    //        
+    //        Player br1 = new Player("1,Novak Djokovic,mentality,hard,0");
+    //        
+    //
+    //        br1.setName("Mile Milovic");
+    //        br1.setAbility("psiha");
+    //        br1.setPreferedSurface("sljaka");
+    //        br1.setAtpRank(2);
+    //        br1.setAtpPoints(13);
+    //        br1.setInjured(true);
+    //        System.out.println(br1.toString());
+    //        
+    //    }   
 }

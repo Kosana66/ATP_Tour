@@ -5,19 +5,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Collections;
 
 public class Championship {
-
+ 
     private ArrayList<Player> players;
     private ArrayList<Tournament> tournaments;
     
     public Championship() {
-        
+        players = new ArrayList<Player>();
+        tournaments = new ArrayList<Tournament>();
     }
     
     public void updateAtpRanks() {
+        
+        // sortiranje po poenima
+        Collections.sort(players, players.get(0));
+        // izmena pozicije na listi
+        for(int position = 1 ; position <= players.size(); position++)
+            players.get(position-1).setAtpRank(position);
         
     }
     public void recoverPlayers() {
@@ -27,42 +33,51 @@ public class Championship {
         }
     }
     public void loadFiles() {
-	File fajl = new File("."+"players.txt");
+        String sP = System.getProperty("file.separator");
+	File fajl = new File("."+ sP +"src" + sP + "paket1" + sP + "players.txt");
         String tmpLine;
 	if(fajl.exists()){
-            BufferedReader in = null;
             try {
-                in = new BufferedReader(new FileReader(fajl));
-            } catch (FileNotFoundException ex) {
-                System.out.println("Fajl player.txt ne postoji na datoj lokaciji.");
-                System.exit(0);
-            }
-            try {
+                BufferedReader in = new BufferedReader(new FileReader(fajl));
                 while((tmpLine = in.readLine()) != null)
                     players.add(new Player(tmpLine));
-            } catch (IOException ex) {
-                Logger.getLogger(Championship.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        fajl = new File("."+"tournaments.txt");
-	if(fajl.exists()){
-            BufferedReader in = null;
-            try {
-                in = new BufferedReader(new FileReader(fajl));
             } catch (FileNotFoundException ex) {
-                System.out.println("Fajl tournament.txt ne postoji na datoj lokaciji.");
+                System.out.println("Fajl players.txt - FileNotFoundException");
+                System.exit(0);
+            } catch (IOException ex) {
+                System.out.println("IO izuzetak pri citanju fajla players.txt");
                 System.exit(0);
             }
+        } else {
+            System.out.println("Ne postoji fajl player.txt!");
+            System.exit(0);
+	}
+        fajl = new File("."+ sP +"src" + sP + "paket1" + sP + "tournaments.txt");
+	if(fajl.exists()){
             try {
+                BufferedReader in = new BufferedReader(new FileReader(fajl));
                 while((tmpLine = in.readLine()) != null)
                     tournaments.add(new SeasonTournament(tmpLine, players));
+            } catch (FileNotFoundException ex) {
+                System.out.println("Fajl tournament.txt - FileNotFoundException");
+                System.exit(0);
             } catch (IOException ex) {
-                Logger.getLogger(Championship.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("IO izuzetak pri citanju fajla tournament,");
+                System.exit(0);
             }
+        } else {
+            System.out.println("Ne postoji fajl tournament.txt!");
+            System.exit(0);
         }
     }
+    /*
     public static void main(String args[]) {
+        Championship champ = new Championship();
+        champ.loadFiles();
+
+        tournaments.get(0).play();
+        champ.updateAtpRanks();
        
     }
+*/
 }

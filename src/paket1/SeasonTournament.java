@@ -24,6 +24,7 @@ public class SeasonTournament extends Tournament {
         Player winner;
         
         System.out.println("========== Round of 16 ============== \n");
+        
         Collections.shuffle(roundOf16);
         for(int i = 0; i <= 15; i+=2) {
             

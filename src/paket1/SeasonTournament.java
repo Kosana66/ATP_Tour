@@ -13,6 +13,8 @@ public class SeasonTournament extends Tournament {
         super(tekst, contestants);
         roundOf16 = contestants;
         quaterFinalists = new ArrayList<Player>();
+        semiFinalists = new ArrayList<Player>();
+        finalists = new ArrayList<Player>();
     }
     
     @Override
@@ -23,28 +25,68 @@ public class SeasonTournament extends Tournament {
         int numOfContestants = 15;
         Match match;
         
+        System.out.println("Osmina ");
         for(int i = 1; i <= 8; i++) {
-            
             randomNumber1 = rng.nextInt(numOfContestants-0+1);
             do {
                 randomNumber2 = rng.nextInt(numOfContestants-0+1);
             } while(randomNumber1 == randomNumber2);
             match = new Match(roundOf16.get(randomNumber1), roundOf16.get(randomNumber2), super.tourSurface, super.numOfSets);
-            // konverzija plejera da moze u listu
-            winner = match.playMatch();
-            System.out.println(winner.toString());
-            quaterFinalists.add(winner);
-            roundOf16.remove(randomNumber1);
-            roundOf16.remove(randomNumber2);
+            
+            quaterFinalists.add(match.playMatch());
+            if (randomNumber1 > randomNumber2) {
+                roundOf16.remove(randomNumber1);
+                roundOf16.remove(randomNumber2);
+            } else {
+                roundOf16.remove(randomNumber2);
+                roundOf16.remove(randomNumber1);
+            }
             if(numOfContestants > 1)
                 numOfContestants -= 2;
-            
-            System.out.println("randomNumber1 : " + randomNumber1);
-            System.out.println("randomNumber2 : " + randomNumber2);
-            System.out.println("Pobednik : " );
-            System.out.println("\t" + quaterFinalists.get(i-1).toString());
-            System.out.println();
         }
+        
+        System.out.println("Cetvrtina ");
+        numOfContestants = 7;
+        for(int i = 1; i <= 4; i++) {
+            randomNumber1 = rng.nextInt(numOfContestants-0+1);
+            do {
+                randomNumber2 = rng.nextInt(numOfContestants-0+1);
+            } while(randomNumber1 == randomNumber2);
+            match = new Match(quaterFinalists.get(randomNumber1), quaterFinalists.get(randomNumber2), super.tourSurface, super.numOfSets);
+            
+            semiFinalists.add(match.playMatch());
+            if (randomNumber1 > randomNumber2) {
+                quaterFinalists.remove(randomNumber1);
+                quaterFinalists.remove(randomNumber2);
+            } else {
+                quaterFinalists.remove(randomNumber2);
+                quaterFinalists.remove(randomNumber1);
+            }
+            if(numOfContestants > 1)
+                numOfContestants -= 2;
+        }
+        
+        System.out.println("Polovina ");
+        numOfContestants = 3;
+        for(int i = 1; i <= 2; i++) {
+            randomNumber1 = rng.nextInt(numOfContestants-0+1);
+            do {
+                randomNumber2 = rng.nextInt(numOfContestants-0+1);
+            } while(randomNumber1 == randomNumber2);
+            match = new Match(semiFinalists.get(randomNumber1), semiFinalists.get(randomNumber2), super.tourSurface, super.numOfSets);
+
+            finalists.add(match.playMatch());
+            if (randomNumber1 > randomNumber2) {
+                semiFinalists.remove(randomNumber1);
+                semiFinalists.remove(randomNumber2);
+            } else {
+                semiFinalists.remove(randomNumber2);
+                semiFinalists.remove(randomNumber1);
+            }
+            if(numOfContestants > 1)
+                numOfContestants -= 2;
+        }
+        
         System.out.println("KRAJ TURNIRA");
         
     }

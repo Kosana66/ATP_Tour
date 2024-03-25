@@ -1,6 +1,6 @@
 package paket1;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
 
 public class SeasonTournament extends Tournament {
 
@@ -13,42 +13,74 @@ public class SeasonTournament extends Tournament {
         super(tekst, contestants);
         roundOf16 = contestants;
         quaterFinalists = new ArrayList<Player>();
+        semiFinalists = new ArrayList<Player>();
+        finalists = new ArrayList<Player>();
     }
     
     @Override
     public void play(){
         super.setPlayable(true);
-        Random rng = new Random();
-        int randomNumber1, randomNumber2;
-        int numOfContestants = 15;
         Match match;
+        Player winner;
         
-        for(int i = 1; i <= 8; i++) {
+        System.out.println("========== Round of 16 ============== \n");
+        Collections.shuffle(roundOf16);
+        for(int i = 0; i <= 15; i+=2) {
             
-            randomNumber1 = rng.nextInt(numOfContestants-0+1);
-            do {
-                randomNumber2 = rng.nextInt(numOfContestants-0+1);
-            } while(randomNumber1 == randomNumber2);
-            match = new Match(roundOf16.get(randomNumber1), roundOf16.get(randomNumber2), super.tourSurface, super.numOfSets);
-            // konverzija plejera da moze u listu
-            winner = match.playMatch();
-            System.out.println(winner.toString());
-            quaterFinalists.add(winner);
-            roundOf16.remove(randomNumber1);
-            roundOf16.remove(randomNumber2);
-            if(numOfContestants > 1)
-                numOfContestants -= 2;
-            
-            System.out.println("randomNumber1 : " + randomNumber1);
-            System.out.println("randomNumber2 : " + randomNumber2);
-            System.out.println("Pobednik : " );
-            System.out.println("\t" + quaterFinalists.get(i-1).toString());
-            System.out.println();
+            match = new Match(roundOf16.get(i), roundOf16.get(i+1), super.tourSurface, super.numOfSets);
+            quaterFinalists.add(match.playMatch());
+            match.printMatchResult();
+            if (quaterFinalists.get(i/2) == roundOf16.get(i)) {
+                roundOf16.get(i+1).setAtpPoints(roundOf16.get(i+1).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 100 : 180) );
+            } else {
+                roundOf16.get(i).setAtpPoints(roundOf16.get(i).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 100 : 180) );
+            }
         }
-        System.out.println("KRAJ TURNIRA");
+        
+        System.out.println("========== Quarterfinals ============== \n");
+        Collections.shuffle(quaterFinalists);
+        for(int i = 0; i <= 7; i+=2) {
+            
+            match = new Match(quaterFinalists.get(i), quaterFinalists.get(i+1), super.tourSurface, super.numOfSets);
+            semiFinalists.add(match.playMatch());
+            match.printMatchResult();
+            if (semiFinalists.get(i/2) == quaterFinalists.get(i)) {
+                quaterFinalists.get(i+1).setAtpPoints(quaterFinalists.get(i+1).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 200 : 360) );
+            } else {
+                quaterFinalists.get(i).setAtpPoints(quaterFinalists.get(i).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 200 : 360) );
+            }
+        }
+        
+        System.out.println("========== Semifinals ============== \n");
+        Collections.shuffle(semiFinalists);
+        for(int i = 0; i <= 3; i+=2) {
+            
+            match = new Match(semiFinalists.get(i), semiFinalists.get(i+1), super.tourSurface, super.numOfSets);
+            finalists.add(match.playMatch());
+            match.printMatchResult();
+            if (finalists.get(i/2) == semiFinalists.get(i)) {
+                semiFinalists.get(i+1).setAtpPoints(semiFinalists.get(i+1).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 400 : 720) );
+            } else {
+                semiFinalists.get(i).setAtpPoints(semiFinalists.get(i).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 400 : 720) );
+            }
+        }
+        
+        System.out.println("========== Final ============== \n");
+        match = new Match(finalists.get(0), finalists.get(1), super.tourSurface, super.numOfSets);
+        winner = match.playMatch();    
+        match.printMatchResult();
+        if (winner == finalists.get(0)) {
+            finalists.get(1).setAtpPoints(finalists.get(1).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 650 : 1200) );
+            finalists.get(0).setAtpPoints(finalists.get(0).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 1000 : 2000) );
+        } else {
+            finalists.get(0).setAtpPoints(finalists.get(0).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 650 : 1200) );
+            finalists.get(1).setAtpPoints(finalists.get(1).getAtpPoints() + (super.tourSurface.equals("Masters1000") ? 1000 : 2000) );
+        } 
+        
+        
         
     }
-    
+    /*
     public static void main(String args[]) {
         ArrayList<Player> contestants = new ArrayList<Player>();
         contestants.add(new Player("1,Novak Djokovic,mentality,hard,0"));
@@ -69,8 +101,8 @@ public class SeasonTournament extends Tournament {
         contestants.add(new Player("16,Frances Tiafoe,serve,clay,0"));
         
         
-        SeasonTournament turnir1 = new SeasonTournament("Monte-Carlo Masters,clay,Masters1000", contestants);
+        SeasonTournament turnir1 = new SeasonTournament("Monte-Carlo Masters,clay,Grand Slam", contestants);
         turnir1.play();
     }
-    
+    */
 }

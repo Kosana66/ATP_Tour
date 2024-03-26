@@ -18,13 +18,11 @@ public class Championship {
     }
     
     public void updateAtpRanks() {
-        
         // sortiranje po poenima
         Collections.sort(players, players.get(0));
         // izmena pozicije na listi
         for(int position = 1 ; position <= players.size(); position++)
-            players.get(position-1).setAtpRank(position);
-        
+            players.get(position-1).setAtpRank(position);  
     }
     public void recoverPlayers() {
         for(Player p : players) {
@@ -70,6 +68,15 @@ public class Championship {
             System.exit(0);
         }
     }
+    
+    public ArrayList<Tournament> getTournaments() {
+        return tournaments;
+    }
+    
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+    
     /*
     public static void main(String args[]) {
         Championship champ = new Championship();

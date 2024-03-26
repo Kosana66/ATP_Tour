@@ -23,12 +23,16 @@ abstract public class Tournament {
         this.contestants = contestants;
         if(this.tourType.equals("Grand Slam"))
             numOfSets = 3;
-        else if(this.tourType.equals("Masters1000"))
+        else 
             numOfSets = 2;
     }
     
     public boolean getPlayable(){
         return playable;
+    }
+    
+    public String getName(){
+        return tourName;
     }
     
     public ArrayList<Player> getContestants(){

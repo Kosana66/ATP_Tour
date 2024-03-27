@@ -45,6 +45,7 @@ public class Simulate {
                         st.play();
                         champ.updateAtpRanks();
                         champ.recoverPlayers();
+                        break;
                     }
                 } 
             }
@@ -53,7 +54,7 @@ public class Simulate {
                 System.out.println("Ne postoji takav turnir. Molimo Vas, unesite drugi.");
             }
         }
-    
+  
         for(Player tmpPlayer : champ.getPlayers())    
                 System.out.println(tmpPlayer.toString()); 
         
@@ -69,7 +70,7 @@ public class Simulate {
         champ.updateAtpRanks();
         for(Player tmpPlayer : champ.getPlayers())    
                 System.out.println(tmpPlayer.toString()); 
-        System.out.println("\nOVE GODINE JE " + champ.getPlayers().get(0).getAtpRank() + " MESTO OSVOJIO " + champ.getPlayers().get(0).getName());
+        System.out.println("\nOve godine je " + champ.getPlayers().get(0).getAtpRank() + " mesto osvojio " + champ.getPlayers().get(0).getName() + ".");
         
     }
 

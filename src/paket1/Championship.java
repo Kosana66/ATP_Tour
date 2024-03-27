@@ -77,14 +77,4 @@ public class Championship {
         return players;
     }
     
-    /*
-    public static void main(String args[]) {
-        Championship champ = new Championship();
-        champ.loadFiles();
-
-        tournaments.get(0).play();
-        champ.updateAtpRanks();
-       
-    }
-*/
 }

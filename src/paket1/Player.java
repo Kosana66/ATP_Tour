@@ -101,19 +101,5 @@ public class Player implements Comparator<Player> {
     public int compare(Player player1, Player player2) {
         return -Integer.compare(player1.getAtpPoints(), player2.getAtpPoints());
     }  
-    
-    //    public static void main(String args[]) {
-    //        
-    //        Player br1 = new Player("1,Novak Djokovic,mentality,hard,0");
-    //        
-    //
-    //        br1.setName("Mile Milovic");
-    //        br1.setAbility("psiha");
-    //        br1.setPreferedSurface("sljaka");
-    //        br1.setAtpRank(2);
-    //        br1.setAtpPoints(13);
-    //        br1.setInjured(true);
-    //        System.out.println(br1.toString());
-    //        
-    //    }   
+      
 }

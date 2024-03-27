@@ -112,9 +112,6 @@ public class Match {
                 break;
             }
         }
-        //System.out.println("Poeni u tie break: ");
-        //System.out.println("P1: " + p1Points);
-        //System.out.println("P2: " + p2Points);
     }
     
     private void playSet() {
@@ -151,7 +148,7 @@ public class Match {
         p2Sets = 0;   
         int cnt = 0;
         Random rndNum = new Random();
-        
+       
         if(rndNum.nextInt(100-0+1) == 1) {
             if(rndNum.nextInt(1-0+1)+1 == 1) {
                 p1.setInjured(true);
@@ -195,16 +192,6 @@ public class Match {
         System.out.println();
     }
     
-   /* public static void main(String args[]) {
-        Player p1 = new Player("1,Novak Djokovic,mentality,hard,0");
-        Player p2 = new Player("3,Jannik Sinner,backhand,hard,0");
-        Match turnir1 = new Match(p1, p2, "hard", 3);
-        Player p = turnir1.playMatch();
-        turnir1.printMatchResult();
-        Match turnir2 = new Match(p2, p1, "hard", 3);
-        Player pp = turnir2.playMatch();
-        turnir2.printMatchResult();
-    }*/
         
 }
 

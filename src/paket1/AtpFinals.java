@@ -92,31 +92,6 @@ public class AtpFinals extends Tournament{
         
         System.out.println("\n========== Winner ==============");
             System.out.println(winner.getName());
-            
-        
-        
+          
     }
-    /*
-    public static void main(String args[]) {
-        ArrayList<Player> contestants = new ArrayList<Player>();
-        contestants.add(new Player("1,Novak Djokovic,mentality,hard,0"));
-        contestants.add(new Player("2,Carlos Alcaraz,forehand,clay,0"));
-        contestants.add(new Player("3,Jannik Sinner,backhand,hard,0"));
-        contestants.add(new Player("4,Daniil Medvedev,serve,hard,0"));
-        contestants.add(new Player("5,Andrey Rublev,forehand,hard,0"));
-        contestants.add(new Player("6,Alexander Zverev,backhand,hard,0"));
-        contestants.add(new Player("7,Holger Rune,serve,clay,0"));
-        contestants.add(new Player("8,Hubert Hurkacz,serve,grass,0"));
-        contestants.add(new Player("9,Casper Ruud,forehand,clay,0"));
-        contestants.add(new Player("10,Alex de Minaur,forehand,grass,0"));
-        contestants.add(new Player("11,Stefanos Tsitsipas,backhand,grass,0"));
-        contestants.add(new Player("12,Taylor Fritz,serve,hard,0"));
-        contestants.add(new Player("13,Grigor Dimitrov,forehand,hard,0"));
-        contestants.add(new Player("14,Tommy Paul,forehand,clay,0"));
-        contestants.add(new Player("15,Karen Khachanov,serve,hard,0"));
-        contestants.add(new Player("16,Frances Tiafoe,serve,clay,0"));
-        
-        AtpFinals fin = new AtpFinals(contestants);
-        fin.play();
-    }*/
 }

@@ -152,10 +152,12 @@ public class Match {
         if(rndNum.nextInt(100-0+1) == 1) {
             if(rndNum.nextInt(1-0+1)+1 == 1) {
                 p1.setInjured(true);
+                p2Sets = winSetNum;
                 System.out.println("Teniser " + p1.getName() + " se povredio. ");
                 return p2;
             } else {
                 p2.setInjured(true);
+                p1Sets = winSetNum;
                 System.out.println("Teniser " + p2.getName() + " se povredio. ");
                 return p1;
             }

@@ -44,6 +44,8 @@ public class Simulate {
                         SeasonTournament st = new SeasonTournament(input, champ.getPlayers());
                         st.play();
                         champ.updateAtpRanks();
+                        for(Player tmpPlayer : champ.getPlayers())    
+                		System.out.println(tmpPlayer.toString()); 
                         champ.recoverPlayers();
                         break;
                     }
